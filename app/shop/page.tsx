@@ -2,7 +2,7 @@
 
 const products = [
   {
-    name: "Wild BC Halibut",
+    name: "Wild  Halibut",
     price: 23.68,  // WAS: 21 or 16 (wrong)
     retail: 32.00,
     unit: "/lb",

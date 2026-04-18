@@ -1,35 +1,25 @@
-// app/api/check-prices/route.ts
-import { NextResponse } from "next/server"
+# Updated SAFETY_CHECK logic for price_tracker.py
 
-export async function GET() {
-  // In reality, you'd scrape these or use an API
-  // For now, manual weekly updates via this endpoint
-  
-  const currentPrices = {
-    halibut: {
-      safeway: 32.00,
-      wholeFoods: 34.99,
-      localAverage: 31.50,
-      ourPrice: 23.68,
-      savings: 8.32
+SALMON_CATEGORIES = {
+    "farmed_atlantic": {
+        "keywords": ["atlantic", "farm raised", "farmed", "marine harvest"],
+        "retail_price": 17.99,  # Superstore/Loblaws typical
+        "dockside_comparison": "You sell wild, they sell farmed - not comparable"
     },
-    salmon: {
-      safeway: 28.00,
-      wholeFoods: 29.99,
-      localAverage: 27.50,
-      ourPrice: 20.72,
-      savings: 7.28
-    },
-    prawns: {
-      safeway: 42.00,
-      wholeFoods: 44.99,
-      localAverage: 40.00,
-      ourPrice: 31.08,
-      savings: 10.92
-    },
-    lastUpdated: new Date().toISOString(),
-    note: "Manual check required weekly - Safeway.ca blocks scraping"
-  }
-
-  return NextResponse.json(currentPrices)
+    "wild_pacific": {
+        "keywords": ["wild", "sockeye", "coho", "spring", "chinook", "pink", "pacific"],
+        "retail_price": 28.00,  # Safeway/Whole Foods wild sockeye
+        "dockside_vs_retail": 0.26  # You charge 26% below this
+    }
 }
+
+def categorize_salmon(product_name: str, price: float):
+    name = product_name.lower()
+    
+    if any(k in name for k in SALMON_CATEGORIES["farmed_atlantic"]["keywords"]):
+        return "farmed_atlantic", price, "NOT_COMPARABLE"
+    
+    elif any(k in name for k in SALMON_CATEGORIES["wild_pacific"]["keywords"]):
+        return "wild_pacific", price, "YOUR_COMPETITION"
+    
+    return "unknown", price, "CHECK_MANUALLY"

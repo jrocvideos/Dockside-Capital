@@ -1,7 +1,3 @@
-cd ~/Dockside-Capital
-
-# Completely overwrite shop/page.tsx with correct content
-cat > app/shop/page.tsx << 'EOF'
 import Link from "next/link";
 
 const products = [
@@ -70,11 +66,10 @@ export default function Shop() {
     </div>
   );
 }
-EOF
+ENDOFFILE
 
-# Also fix page.tsx if needed
-cat > app/page.tsx << 'EOF'
-import Image from "next/image";
+# Create home page fresh  
+cat > app/page.tsx << 'ENDOFFILE'
 import Link from "next/link";
 
 export default function Home() {
@@ -135,12 +130,4 @@ export default function Home() {
     </div>
   );
 }
-EOF
-
-# Remove any broken API files
-rm -f app/api/check-prices/route.ts
-
-# Commit and push
-git add -A
-git commit -m "Fix: Complete rewrite with correct customer pricing"
-git push origin main
+ENDOFFILE

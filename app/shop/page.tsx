@@ -1,33 +1,60 @@
-// app/shop/page.tsx - CORRECTED PRICING
+import Link from "next/link";
 
-const products = [
-  {
-    name: "Wild  Halibut",
-    price: 23.68,  // WAS: 21 or 16 (wrong)
-    retail: 32.00,
-    unit: "/lb",
-    savings: "Save $8.32/lb",
-    description: "Line-caught, dock-to-door fresh"
-  },
-  {
-    name: "Wild BC Sockeye Salmon", 
-    price: 20.72,  // WAS: 19 (wrong)
-    retail: 28.00,
-    unit: "/lb", 
-    savings: "Save $7.28/lb",
-    description: "Glacier-fed, vibrant red flesh"
-  },
-  {
-    name: "Jumbo Spot Prawns",
-    price: 31.08,  // WAS: 29 (wrong)
-    retail: 42.00,
-    unit: "/lb",
-    savings: "Save $10.92/lb", 
-    description: "Live-trapped, sweet & firm"
-  }
-];
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-blue-900 text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Dockside Capital</h1>
+          <p className="text-xl mb-8">Wild BC Seafood Direct to Your Church</p>
+          <Link href="/shop" className="bg-yellow-500 text-blue-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-400">
+            Pre-Order Now
+          </Link>
+        </div>
+      </div>
 
-// In your JSX, display like this:
-<h3 className="text-3xl font-bold text-blue-900">${product.price}<span className="text-lg text-gray-600">{product.unit}</span></h3>
-<p className="text-sm text-red-500 line-through">Retail: ${product.retail}{product.unit}</p>
-<p className="text-sm text-green-600 font-semibold">{product.savings}</p>
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow text-center">
+            <h2 className="text-4xl font-bold text-blue-900">26%</h2>
+            <p className="text-gray-600">Below Retail</p>
+            <p className="text-xs text-gray-500 mt-1">vs Safeway/Superstore</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow text-center">
+            <h2 className="text-4xl font-bold text-blue-900">$23.68</h2>
+            <p className="text-gray-600">Halibut per lb</p>
+            <p className="text-xs text-gray-500 mt-1">Retail: $32.00</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow text-center">
+            <h2 className="text-4xl font-bold text-blue-900">3</h2>
+            <p className="text-gray-600">Church Pickups</p>
+            <p className="text-xs text-gray-500 mt-1">Vancouver Area</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-8">How It Eliminates Risk</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="text-center p-4">
+            <div className="text-4xl mb-2">🎣</div>
+            <h3 className="font-bold mb-2">We Buy Dockside</h3>
+            <p className="text-sm text-gray-600">Direct from BC fishermen at wholesale</p>
+          </div>
+          <div className="text-center p-4">
+            <div className="text-4xl mb-2">⛪</div>
+            <h3 className="font-bold mb-2">Church Pickup</h3>
+            <p className="text-sm text-gray-600">Pre-orders collected before we buy</p>
+          </div>
+          <div className="text-center p-4">
+            <div className="text-4xl mb-2">💰</div>
+            <h3 className="font-bold mb-2">You Save 26%</h3>
+            <p className="text-sm text-gray-600">vs retail with zero spoilage risk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
